@@ -15,7 +15,7 @@ System.out.println(e);
 int empId = 0;
 try (Statement statement1 = connection.createStatement()) {
 String sql = String.format("insert into employee(name,gender,startDate,phone,address) " +
-"values ('%s','%s','%s',%d,'%s') ", "Rohini", "F", "2021-01-10", 826875654, "pune");
+"values ('%s','%s','%s',%d,'%s') ", "prakash", "M", "2021-08-10", 998555554, "bsp");
 
 int rowsAffected = statement1.executeUpdate(sql, statement1.RETURN_GENERATED_KEYS);
 if (rowsAffected == 1) {
