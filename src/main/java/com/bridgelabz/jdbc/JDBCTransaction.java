@@ -15,7 +15,7 @@ public class JDBCTransaction {
 		int empId = 0;
 		try (Statement statement1 = connection.createStatement()) {
 			String sql = String.format("insert into employee_payroll_details(name,gender,startDate,phone,address) "
-					+ "values ('%s','%s','%s',%d,'%s') ", "prakash", "m", "2000-12-05", 998163003, "bsp");
+					+ "values ('%s','%s','%s',%d,'%s') ", "Terrisa", "f", "2017-05-01", 645246455, "Usa");
 
 			int rowsAffected = statement1.executeUpdate(sql, statement1.RETURN_GENERATED_KEYS);
 			if (rowsAffected == 1) {
