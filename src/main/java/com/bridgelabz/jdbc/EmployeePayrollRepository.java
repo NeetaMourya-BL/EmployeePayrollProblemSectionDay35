@@ -65,7 +65,20 @@ public class EmployeePayrollRepository {
 			e.printStackTrace();
 		}
 	}
-
+	//delete payroll_details of employee
+		public boolean deletePayrollData(int id) {
+			try (Connection connection = getConnection()) {
+				Statement statement = connection.createStatement();
+				String sqlQuery = String.format("delete payroll_details where id = '%d'", id);
+				int result = statement.executeUpdate(sqlQuery);
+				if (result >= 1) {
+					System.out.println("data deleted");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
 //update salary using prepared statement
 	public void updateSalaryUsingPreparedStatement(String name, double d) {
 		try (Connection connection = getConnection()) {

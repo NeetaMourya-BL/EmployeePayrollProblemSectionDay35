@@ -42,16 +42,20 @@ public class EmployeePayrollService {
 		System.out.println(employeePayrollRepository.getCountByGender());
 	}
 
+	private void deletePayrollData(int i) {
+		System.out.println(employeePayrollRepository.deletePayrollData(4));
+	}
+
 	public static void main(String[] args) {
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService();
 		employeePayrollService.retrieveData();
 		employeePayrollService.updateSalary("Terrisa", 3000000.00);
 		employeePayrollService.retrieveDataByDateRange(null);
+		employeePayrollService.deletePayrollData(4);
 		employeePayrollService.getSumOfSalaryByGender(null);
 		employeePayrollService.getAverageSalaryByGender(null);
 		employeePayrollService.getMaxSalaryByGender(null);
 		employeePayrollService.getMinSalaryByGender(null);
 		employeePayrollService.getCountByGender(null);
 	}
-
 }
