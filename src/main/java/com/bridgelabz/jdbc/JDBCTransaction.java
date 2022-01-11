@@ -15,7 +15,7 @@ public class JDBCTransaction {
 		int empId = 0;
 		try (Statement statement1 = connection.createStatement()) {
 			String sql = String.format("insert into employee_payroll_details(name,gender,startDate,phone,address) "
-					+ "values ('%s','%s','%s',%d,'%s') ", "harshita", "f", "2018-08-15", 982736465, "maihar");
+					+ "values ('%s','%s','%s',%d,'%s') ", "harshita", "f", "2018-01-01", 982736466, "maihar");
 
 			int rowsAffected = statement1.executeUpdate(sql, statement1.RETURN_GENERATED_KEYS);
 			if (rowsAffected == 1) {
@@ -31,7 +31,7 @@ public class JDBCTransaction {
 			System.out.println(e);
 			connection.rollback();
 		}
-		int salary = 15000;
+		int salary = 25000;
 		try (Statement statement1 = connection.createStatement()) {
 			int deductions = (int) (salary * 0.2);
 			int taxablePay = salary - deductions;

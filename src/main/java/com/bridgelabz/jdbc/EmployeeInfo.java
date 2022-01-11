@@ -9,8 +9,8 @@ public class EmployeeInfo {
 	private Date startDate;
 	private String phone;
 	private String address;
-    private double basic_pay;
-    private String[]departmentName;
+	private double basic_pay;
+	private String[] departmentName;
 
 	public int getId() {
 		return id;
@@ -59,7 +59,6 @@ public class EmployeeInfo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
 
 	public double getBasic_pay() {
 		return basic_pay;

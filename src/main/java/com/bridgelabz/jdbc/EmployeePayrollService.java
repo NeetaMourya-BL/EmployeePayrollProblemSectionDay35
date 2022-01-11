@@ -11,6 +11,7 @@ public class EmployeePayrollService {
 		employeePayrollService.updateSalary("Terrisa", 3000000.00);
 		employeePayrollService.retrieveDataByDate();
 	}
+
 	public void retrieveData() {
 		System.out.println(employeePayrollRepository.retrieveData());
 	}

@@ -39,9 +39,9 @@ public class EmployeePayrollRepository {
 				employeeInfo.setGender(resultSet.getString("gender").charAt(0));
 				employeeInfo.setPhone(resultSet.getString("phone"));
 				employeeInfo.setAddress(resultSet.getString("address"));
-                employeeInfo.setStartDate(Date.valueOf(resultSet.getDate("startDate").toLocalDate()));
-                employeeInfo.setBasic_pay(resultSet.getDouble("basic_pay"));
-                employeeInfos.add(employeeInfo);
+				employeeInfo.setStartDate(Date.valueOf(resultSet.getDate("startDate").toLocalDate()));
+				employeeInfo.setBasic_pay(resultSet.getDouble("basic_pay"));
+				employeeInfos.add(employeeInfo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,8 +54,7 @@ public class EmployeePayrollRepository {
 	public void updateSalary(String name, int basic_pay) {
 		try (Connection connection = getConnection()) {
 			Statement statement = connection.createStatement();
-			String sqlQuery = String.format("update employees set basic_pay = %d where name = '%s'", basic_pay,
-					name);
+			String sqlQuery = String.format("update employees set basic_pay = %d where name = '%s'", basic_pay, name);
 			int result = statement.executeUpdate(sqlQuery);
 			if (result >= 1) {
 				System.out.println("salary updated");
