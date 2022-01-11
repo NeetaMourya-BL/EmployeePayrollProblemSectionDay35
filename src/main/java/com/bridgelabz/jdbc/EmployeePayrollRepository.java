@@ -105,4 +105,24 @@ public class EmployeePayrollRepository {
 		}
 		return employeeInfo;
 	}
+	public List<EmployeePayroll> retrieveDeparmentData() {
+		List<EmployeePayroll> employeePayrollList = new ArrayList<>();
+
+		try (Connection connection = getConnection()) {
+			// step 3
+			Statement statement = connection.createStatement();
+			String sqlQuery = "select * from department";
+			ResultSet resultSet = statement.executeQuery(sqlQuery);
+			while (resultSet.next()) {
+				EmployeePayroll employeePayroll = new EmployeePayroll();
+				employeePayroll.setId(resultSet.getInt("id"));
+				employeePayroll.setDepartmentName(resultSet.getString("dept_name"));
+				employeePayrollList.add(employeePayroll);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return employeePayrollList;
+
+	}
 }

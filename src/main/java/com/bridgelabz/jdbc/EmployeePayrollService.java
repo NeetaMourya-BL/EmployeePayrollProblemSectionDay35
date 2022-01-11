@@ -10,8 +10,8 @@ public class EmployeePayrollService {
 		employeePayrollService.retrieveData();
 		employeePayrollService.updateSalary("Terrisa", 3000000.00);
 		employeePayrollService.retrieveDataByDate();
+		employeePayrollService.retrieveDepartmentData();
 	}
-
 	public void retrieveData() {
 		System.out.println(employeePayrollRepository.retrieveData());
 	}
@@ -23,5 +23,8 @@ public class EmployeePayrollService {
 
 	private void retrieveDataByDate() {
 		System.out.println(employeePayrollRepository.retrieveDataByDateRange());
+	}
+	private void retrieveDepartmentData() {
+		System.out.println(employeePayrollRepository.retrieveDeparmentData());		
 	}
 }

@@ -10,7 +10,6 @@ public class EmployeeInfo {
 	private String phone;
 	private String address;
 	private double basic_pay;
-	private String[] departmentName;
 
 	public int getId() {
 		return id;
