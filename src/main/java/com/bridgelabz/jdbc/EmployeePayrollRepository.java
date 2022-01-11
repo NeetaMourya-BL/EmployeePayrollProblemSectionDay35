@@ -8,14 +8,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmployeePayrollRepository {
 
 	public Connection getConnection() {
 		Connection connection = null;
 		try {
-			String JDBCURL = "jdbc:mysql://localhost:3306/employee_payroll_service";
+			String JDBCURL = "jdbc:mysql://localhost:3306/payroll_service_db";
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection(JDBCURL, "root", "neeta");
 		} catch (ClassNotFoundException | SQLException e) {
@@ -105,6 +107,7 @@ public class EmployeePayrollRepository {
 		}
 		return employeeInfo;
 	}
+
 	public List<EmployeePayroll> retrieveDeparmentData() {
 		List<EmployeePayroll> employeePayrollList = new ArrayList<>();
 
@@ -124,5 +127,100 @@ public class EmployeePayrollRepository {
 		}
 		return employeePayrollList;
 
+	}
+
+	// Sum of salary by gender;
+	public Map<String, Double> getSumOfSalaryByGender() {
+		Map<String, Double> sumOfSalary = new HashMap<>();
+		try (Connection connection = getConnection()) {
+			Statement statement = connection.createStatement();
+			String query = "select gender,sum(basic_pay) as sum_salary from employee_payroll group by gender;";
+			ResultSet resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				EmployeeInfo info = new EmployeeInfo();
+				String gender = String.valueOf(resultset.getString("gender").charAt(0));
+				Double sum_salary = Double.valueOf(resultset.getString("sum_salary"));
+				sumOfSalary.put(gender, sum_salary);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return sumOfSalary;
+	}
+
+	// average salary by gender
+	public Map<String, Double> getAverageSalaryByGender() {
+		Map<String, Double> avgSalary = new HashMap<>();
+		try (Connection connection = getConnection()) {
+			Statement statement = connection.createStatement();
+			String query = "select gender,avg(basic_pay) as avg_salary from employee_payroll group by gender;";
+			ResultSet resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				EmployeeInfo info = new EmployeeInfo();
+				String gender = String.valueOf(resultset.getString("gender").charAt(0));
+				Double avg_salary = Double.valueOf(resultset.getString("avg_salary"));
+				avgSalary.put(gender, avg_salary);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return avgSalary;
+	}
+
+	// maximum salary by gender
+	public Map<String, Double> getMaxSalaryByGender() {
+		Map<String, Double> maxSalary = new HashMap<>();
+		try (Connection connection = getConnection()) {
+			Statement statement = connection.createStatement();
+			String query = "select gender,max(basic_pay) as max_salary from employee_payroll group by gender;";
+			ResultSet resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				EmployeeInfo info = new EmployeeInfo();
+				String gender = String.valueOf(resultset.getString("gender").charAt(0));
+				Double max_salary = Double.valueOf(resultset.getString("max_salary"));
+				maxSalary.put(gender, max_salary);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return maxSalary;
+	}
+
+	// mimimum salary by gender
+	public Map<String, Double> getMinSalaryByGender() {
+		Map<String, Double> minSalary = new HashMap<>();
+		try (Connection connection = getConnection()) {
+			Statement statement = connection.createStatement();
+			String query = "select gender,min(basic_pay) as min_salary from employee_payroll group by gender;";
+			ResultSet resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				EmployeeInfo info = new EmployeeInfo();
+				String gender = String.valueOf(resultset.getString("gender").charAt(0));
+				Double min_salary = Double.valueOf(resultset.getString("min_salary"));
+				minSalary.put(gender, min_salary);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return minSalary;
+	}
+
+	// count by gender
+	public Map<String, Integer> getCountByGender() {
+		Map<String, Integer> countByGender = new HashMap<>();
+		try (Connection connection = getConnection()) {
+			Statement statement = connection.createStatement();
+			String query = "select gender,count(*) as count from employee_payroll group by gender";
+			ResultSet resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				EmployeeInfo info = new EmployeeInfo();
+				String gender = String.valueOf(resultset.getString("gender").charAt(0));
+				Integer count = Integer.valueOf(resultset.getString("count"));
+				countByGender.put(gender, count);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return countByGender;
 	}
 }
